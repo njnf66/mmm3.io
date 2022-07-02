@@ -50,7 +50,7 @@
 			background: #fff;
 			padding: 2.5vh 2vw;
 			border-radius: 1vh;
-			margin-top: 0.5vh;
+			margin-top: 0.7vh;
 			margin-bottom: 4vh;
 			box-sizing: border-box;
 			display: flex;
@@ -182,9 +182,9 @@
 <body>
 	<div class="contentBox">
 		<div class="content">
-			<div style="margin-top: 1vh;height:5vh">
-				<span>姓名： </span><span id="stuName" contenteditable="true"
-					onfocus="setName()" onblur="resetName()">null(仅可修改一次)</span>
+			<div style="margin-top: 0.8vh;height:5.2vh">
+				<span>姓名： </span><span id="stuName" contenteditable="true" onfocus="setName()"
+					onblur="resetName()">null(仅可修改一次)</span>
 			</div>
 			<div style="height:6vh">
 				<span>部门： </span><span id="stuDept" contenteditable="true">物理与信息工程学院</span>
@@ -226,17 +226,17 @@
 				stuName = document.getElementById('stuName').textContent;
 			}
 			// if (stuName == "") {
-				// document.getElementById('stuName').textContent = '';
-				if (stuName != "") {
-					$("#stuName").attr("contenteditable", "false");
-					console.log(stuName);
-					// alert(stuName);
-				}
+			// document.getElementById('stuName').textContent = '';
+			if (stuName != "") {
+				$("#stuName").attr("contenteditable", "false");
+				console.log(stuName);
+				// alert(stuName);
+			}
 			// }
 		}
-		function resetName(){
+		function resetName() {
 			// 除去文字左侧的空格，or 重置修改机会。
-			document.getElementById('stuName').textContent=document.getElementById('stuName').textContent.replace(/^\s+|\s+$/g,"");
+			document.getElementById('stuName').textContent = document.getElementById('stuName').textContent.replace(/^\s+|\s+$/g, "");
 			if (document.getElementById('stuName').textContent == "") {
 				document.getElementById('stuName').textContent = 'null(仅可修改一次)';
 			}
@@ -244,20 +244,34 @@
 
 
 		//时间
+		// 日期
 		let date = dateFormat(new Date())
 		$('#date').html(date)
+		// 时分
 		let time = dateFormat2(new Date())
 		$('#time').html(time)
-		//口令
-		let float = whatPassword(new Date())
-		$('#float').text(float)
 		//秒
-		let second
+		let second = new Date().getSeconds()
+		if (second < 10) second = '0' + second
+		$('#second').html(second)
+
 		setInterval(() => {
+			// 日期
+			date = dateFormat(new Date())
+			$('#date').html(date)
+			// 时分
+			time = dateFormat2(new Date())
+			$('#time').html(time)
+			//秒
 			second = new Date().getSeconds()
 			if (second < 10) second = '0' + second
 			$('#second').html(second)
+			$('#time').html(time)
 		}, 1000)
+
+		//口令
+		let float = whatPassword(new Date())
+		$('#float').text(float)
 
 		CreateIma()
 		//生成条码
